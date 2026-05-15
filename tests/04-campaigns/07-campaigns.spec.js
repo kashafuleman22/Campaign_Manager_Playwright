@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-const baseURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/';
-const dashboardURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/main/campaign';
+const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
+const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main/campaign';
 
 // reusable login function
 async function login(page, username, password) {
@@ -43,16 +43,18 @@ test.describe('Campaign Feature >> Campaigns', () => {
     await page.getByRole('combobox', { name: 'Select Channel' }).click();
     await page.getByText('Voice').click();
     await page.getByRole('combobox', { name: 'Select Segment' }).click();
-    await page.getByRole('option', { name: 'Kashaf' }).click();
+    await page.getByRole('option', { name: 'Ks' }).click();
     // await page.getByText('Kashaf').click();
     await page.getByRole('combobox', { name: 'Select Start Date' }).click();
     await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
     await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
     await page.getByRole('combobox', { name: 'Select End Date' }).click();
-    await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
-    await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
+    // await page.locator('.p-ripple.p-button.p-component.p-button-rounded.p-button-text.p-button-sm.p-datepicker-increment-button').first().click();
+    // await page.locator('.p-ripple.p-button.p-component.p-button-rounded.p-button-text.p-button-sm.p-datepicker-increment-button').first().click();
+    // await page.locator('.p-ripple.p-button.p-component.p-button-rounded.p-button-text.p-button-sm.p-datepicker-increment-button').first().click();
+    await page.getByRole('checkbox', { name: 'No End date' }).check();
     await page.getByRole('combobox', { name: 'Select IVR Menu' }).click();
-    await page.getByRole('option', { name: '110' }).click();
+    await page.getByRole('option', { name: '112' }).click();
     await page.getByPlaceholder('Enter priority (1-10)').click();
     await page.getByPlaceholder('Enter priority (1-10)').fill('1');
     await page.getByRole('button', { name: 'Next ' }).click();
@@ -60,7 +62,7 @@ test.describe('Campaign Feature >> Campaigns', () => {
     await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
     await page.getByRole('combobox', { name: 'Select time' }).nth(1).click();
     await page.locator('.p-ripple.p-button.p-component.p-button-rounded.p-button-text.p-button-sm').first().click();
-    await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
+    await page.locator('.p-ripple.p-button.p-component.p-button-rounded.p-button-text.p-button-sm').first().click();
     await page.getByRole('checkbox', { name: 'Mon' }).check();
     await page.getByRole('checkbox', { name: 'Tue' }).check();
     await page.getByRole('checkbox', { name: 'Wed' }).check();
@@ -83,33 +85,29 @@ test.describe('Campaign Feature >> Campaigns', () => {
   await page.goto(dashboardURL);
   await page.getByRole('button', { name: 'Create Campaign' }).click();
   await page.getByRole('textbox', { name: 'Enter name' }).click();
-  await page.getByRole('textbox', { name: 'Enter name' }).fill('ka');
+  await page.getByRole('textbox', { name: 'Enter name' }).fill('Eman');
   await page.getByRole('combobox', { name: 'Select Type' }).click();
-  await page.getByText('IVR', { exact: true }).click();
+  await page.getByRole('option', { name: 'IVR' }).click();
   await page.getByRole('combobox', { name: 'Select Channel' }).click();
   await page.getByText('Voice').click();
   await page.getByRole('combobox', { name: 'Select Segment' }).click();
-  await page.getByLabel('Amna').getByText('Amna').click();
+  await page.getByRole('option', { name: 'Ks' }).click();
   await page.getByRole('combobox', { name: 'Select Start Date' }).click();
-  await page.getByText('22').click();
+  await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
+  await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
   await page.getByRole('combobox', { name: 'Select End Date' }).click();
-  await page.getByText('28').click();
-  // await page.getByRole('combobox', { name: 'Select Start Date' }).click();
-  // await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
-  // await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
-  // await page.getByRole('combobox', { name: 'Select End Date' }).click();
-  // await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
-  // await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
+  await page.getByRole('checkbox', { name: 'No End date' }).check();
   await page.getByRole('combobox', { name: 'Select IVR Menu' }).click();
-  await page.getByRole('option', { name: '111' }).click();
+  await page.getByRole('option', { name: '112' }).click();
   await page.getByPlaceholder('Enter priority (1-10)').click();
   await page.getByPlaceholder('Enter priority (1-10)').fill('1');
   await page.getByRole('button', { name: 'Next ' }).click();
   await page.getByRole('combobox', { name: 'Select time' }).first().click();
-  await page.locator('.p-ripple.p-button.p-component.p-button-rounded.p-button-text.p-button-sm').first().click();
+  await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
   await page.getByRole('combobox', { name: 'Select time' }).nth(1).click();
   await page.locator('.p-ripple.p-button.p-component.p-button-rounded.p-button-text.p-button-sm').first().click();
   await page.locator('.p-ripple.p-button.p-component.p-button-rounded.p-button-text.p-button-sm').first().click();
+  await page.locator('.p-datepicker-minute-picker > p-button > .p-ripple').first().click();
   await page.getByRole('checkbox', { name: 'Mon' }).check();
   await page.getByRole('checkbox', { name: 'Tue' }).check();
   await page.getByRole('checkbox', { name: 'Wed' }).check();

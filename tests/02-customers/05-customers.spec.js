@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-  const baseURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/';
-  const dashboardURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/main/customerlist';
+  const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
+  const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main/customerlist';
 
   // reusable login function
   async function login(page, username, password) {
@@ -85,7 +85,7 @@ import { test, expect } from '@playwright/test';
     await page.getByRole('link', { name: 'Customers' }).click();
     // await page.getByText('Select Segment').click();
     await page.getByRole('combobox', { name: 'Select Segment' }).click();
-    await page.getByLabel('Option List').getByText('Kashaf').click();
+    await page.getByLabel('Option List').getByText('Ks').click();
     // await page.getByRole('combobox', { name: 'Select Segment' }).click();
     // await page.locator('#segment-p-select').getByRole('button', { name: 'dropdown trigger' }).click();
     // await page.getByRole('option', { name: 'Kashaf' }).click();
@@ -98,9 +98,7 @@ import { test, expect } from '@playwright/test';
     await page.getByText('Customers').first().click();
     await page.getByRole('link', { name: 'Customers' }).click();
     await page.getByText('Select Label').click();
-    await page.getByRole('checkbox', { name: 'green' }).check();
-    await page.getByRole('checkbox', { name: 'blue' }).check();
-    await page.getByRole('checkbox', { name: 'gold' }).check();
+    await page.getByRole('checkbox', { name: 'PWL' }).check();
   });
 
   test('Customer List Panel >> Sorting Customers', async ({ page }) => {

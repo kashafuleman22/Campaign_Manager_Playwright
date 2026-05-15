@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-const baseURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/';
-// const dashboardURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/main';
+const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
+// const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main';
 
 // reusable login function
 async function login(page, username, password) {
@@ -46,16 +46,9 @@ test.describe('Campaign Feature >> Customers', () => {
 
     await page.getByRole('button', { name: 'Upload' }).click();
     await page.getByRole('button', { name: ' Choose Files' }).click();
-    await page.locator('input[type="file"]').setInputFiles('C:/Users/BAHU Computers/Downloads/KashafulEman.csv');
+    await page.locator('input[type="file"]').setInputFiles('C:/Users/BAHU Computers/Downloads/KashafulEman (1) (1).csv');
     // await page.getByRole('button', { name: ' Choose Files' }).setInputFiles('C:/Users/BAHU Computers/Downloads/Kashaf_PW.csv');
     await page.getByRole('button', { name: ' Upload Files' }).click();
-
-    // await page.locator('div').filter({ hasText: 'Upload Contacts (Upload Your' }).nth(3).click();
-    // await page.getByRole('button', { name: 'Upload' }).click();
-
-    //await page.locator('input[type="file"]').setInputFiles('C:/Users/BAHU Computers/Downloads/Kashaf_PW');
-    // await page.getByRole('button', { name: 'Upload Files' }).click();
-
   });
 
   test('Upload Contacts >> Upload Empty CSV file', async ({ page }) => {
@@ -87,7 +80,7 @@ test.describe('Campaign Feature >> Customers', () => {
     await page.getByRole('link', { name: 'Upload Contacts' }).click();
     await page.getByRole('button', { name: 'Upload' }).click();
     await page.getByRole('button', { name: ' Choose Files' }).click();
-    await page.locator('input[type="file"]').setInputFiles('C:/Users/BAHU Computers/Downloads/schema_keys (17).csv');
+    await page.locator('input[type="file"]').setInputFiles('C:/Users/BAHU Computers/Downloads/KashafulEman (1) (1).csv');
     // await page.getByRole('button', { name: ' Choose Files' }).setInputFiles('C:/Users/BAHU Computers/Documents/CSV_Upload/Kashaf_PW.csv');
     await page.getByRole('button', { name: ' Upload Files' }).click();
   });
@@ -171,6 +164,20 @@ test.describe('Campaign Feature >> Customers', () => {
     await page.getByRole('button').nth(3).click();
     await page.getByRole('checkbox', { name: 'Delete associated customers.' }).check();
     await page.getByRole('button', { name: 'Delete' }).click();
+  });
+
+  test('Upload Contacts >> Create Upload CSV file', async ({ page }) => {
+    await page.goto(baseURL);
+    await login(page,"hassan","hassan");
+
+    await page.getByText('Customers').first().click();
+    await page.getByRole('link', { name: ' Customers' }).click();
+    await page.getByRole('link', { name: ' Upload Contacts' }).click();
+
+    await page.getByRole('button', { name: 'Upload' }).click();
+    await page.getByRole('button', { name: ' Choose Files' }).click();
+    await page.locator('input[type="file"]').setInputFiles('C:/Users/BAHU Computers/Downloads/Assigned_Labels.csv');
+    await page.getByRole('button', { name: ' Upload Files' }).click();
   });
 
 });

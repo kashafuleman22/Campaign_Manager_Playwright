@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-const baseURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/';
-// const dashboardURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/main';
+const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
+// const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main';
 
 // reusable login function
 async function login(page, username, password) {

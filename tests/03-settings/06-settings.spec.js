@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-const baseURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/';
-const dashboardURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/main/settings';
+const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
+const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main/settings';
 const logoPath = 'C:/Users/BAHU Computers/Downloads/ob_logo.png';
 const faviconPath = 'C:/Users/BAHU Computers/Downloads/favIcon.png';
 const backgroundPath = 'C:/Users/BAHU Computers/Downloads/bg4.jpg';

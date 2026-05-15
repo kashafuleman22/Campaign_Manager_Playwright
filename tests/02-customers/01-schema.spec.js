@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-  const baseURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/';
-  const dashboardURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/main/customerSchema';
+  const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
+  const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main/customerSchema';
 
   // reusable login function
   async function login(page, username, password) {
@@ -39,7 +39,8 @@ import { test, expect } from '@playwright/test';
     await page.goto(dashboardURL);
     await expect(page).toHaveURL(dashboardURL);
     await page.getByText('Customers').first().click();
-    await page.getByRole('button', { name: 'Create Schema' }).click();
+    await page.getByRole('button', { name: 'Create Schema', exact: true }).click();
+    // await page.getByRole('button', { name: 'Create Schema' }).click();
     await page.getByRole('textbox', { name: 'Enter Display Name' }).click();
     await page.getByRole('textbox', { name: 'Enter Display Name' }).fill('Country');
     await page.getByRole('textbox', { name: 'Precise Description' }).click();
@@ -49,7 +50,25 @@ import { test, expect } from '@playwright/test';
     await page.getByRole('checkbox', { name: 'Mandatory Field' }).check();
     await page.getByRole('textbox', { name: 'Enter default value' }).click();
     await page.getByRole('textbox', { name: 'Enter default value' }).fill('Pakistan');
-    await page.getByRole('button', { name: 'Create' }).click();
+    await page.getByRole('button', { name: ' Create', exact: true }).click();
+  });
+
+  test('Schema Management >> Craete Schema attribute Name', async ({ page }) => {
+    await page.goto(dashboardURL);
+    await expect(page).toHaveURL(dashboardURL);
+    await page.getByText('Customers').first().click();
+    await page.getByRole('button', { name: 'Create Schema', exact: true }).click();
+    // await page.getByRole('button', { name: 'Create Schema' }).click();
+    await page.getByRole('textbox', { name: 'Enter Display Name' }).click();
+    await page.getByRole('textbox', { name: 'Enter Display Name' }).fill('Name');
+    await page.getByRole('textbox', { name: 'Precise Description' }).click();
+    await page.getByRole('textbox', { name: 'Precise Description' }).fill('Personal Name');
+    await page.getByRole('button', { name: 'dropdown trigger' }).click();
+    await page.getByRole('option', { name: 'NAME' }).click();
+    await page.getByRole('checkbox', { name: 'Mandatory Field' }).check();
+    await page.getByRole('textbox', { name: 'Enter default value' }).click();
+    await page.getByRole('textbox', { name: 'Enter default value' }).fill('Kashaf');
+    await page.getByRole('button', { name: ' Create', exact: true }).click();
   });
 
   test('Schema Management >> Craete Schema attribute Phone Number', async ({ page }) => {
@@ -66,6 +85,18 @@ import { test, expect } from '@playwright/test';
     await page.getByRole('checkbox', { name: 'Mandatory Field' }).check();
     await page.getByRole('textbox', { name: 'Enter default value' }).click();
     await page.getByRole('textbox', { name: 'Enter default value' }).fill('03039070064');
+    await page.getByRole('button', { name: 'Create' }).click();
+  });
+
+    test('Schema Management >> Craete Schema attribute Labels', async ({ page }) => {
+    await page.goto(dashboardURL);
+    await expect(page).toHaveURL(dashboardURL);
+    await page.getByText('Customers').first().click();
+    await page.getByRole('button', { name: 'Create Schema' }).click();
+    await page.getByRole('textbox', { name: 'Enter Display Name' }).click();
+    await page.getByRole('textbox', { name: 'Enter Display Name' }).fill('Labels');
+    await page.getByRole('button', { name: 'dropdown trigger' }).click();
+    await page.getByRole('option', { name: 'STRING' }).click();
     await page.getByRole('button', { name: 'Create' }).click();
   });
 
@@ -99,7 +130,7 @@ import { test, expect } from '@playwright/test';
     await expect(page).toHaveURL(dashboardURL);
     await page.getByText('Customers').first().click();
     await page.getByRole('link', { name: 'Schema' }).click();
-    await page.getByText('4 attributes').click();
+    await page.getByText('5 attributes').click();
   });
 
   test('Schema Management >> Actions Icons Visibility', async ({ page }) => {

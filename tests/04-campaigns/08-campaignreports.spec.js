@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-  const baseURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/';
-  const dashboardURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/main/report';
+  const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
+  const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main/report';
 
   // reusable login function
   async function login(page, username, password) {
@@ -51,7 +51,7 @@ import { test, expect } from '@playwright/test';
     await page.goto(dashboardURL);
     await page.getByRole('navigation').locator('div').filter({ hasText: /^Campaigns$/ }).click();
     await page.getByRole('combobox', { name: 'Select Campaign to load data' }).click();
-    await page.getByText('k update').click();
+    await page.getByText('saaa').click();
     const downloadPromise = page.waitForEvent('download');
     await page.getByRole('button', { name: 'Report' }).click();
     const download = await downloadPromise;

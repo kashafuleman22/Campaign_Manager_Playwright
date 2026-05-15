@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-const baseURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/';
-const dashboardURL = 'https://campaign.demo-octavebytes.com/campaign-manager-pg/main/sms-templates';
+const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
+const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main/sms-templates';
 const whatsappTemplateName = 'personalized_template';
 const whatsappTemplateNameUpdate = 'whatsapp_template_for_hubspot';
 
@@ -57,9 +57,6 @@ async function clickTemplateAction(page, templateName, actionIndex) {
 }
 
 test.describe('Campaign Feature >> Campaigns', () => {
-  // test.describe.configure({ mode: 'serial' });
-
-  // LOGIN RUNS BEFORE EVERY TEST (but written once)
   test.beforeEach(async ({ page }) => {
     await page.goto(baseURL);
     await login(page, "hassan", "hassan");
@@ -87,121 +84,6 @@ test.describe('Campaign Feature >> Campaigns', () => {
     await page.getByRole('textbox', { name: 'Sms message body here.' }).fill('Please update your CNIC details');
     await page.getByRole('button', { name: ' Submit' }).click();
   });
-  
-  test('Templates >> Create Template with Delivery mode Whatsapp new', async ({ page }) => {
-
-  await page.goto(dashboardURL);
-
-  await page.getByRole('button', { name: 'Create Template' }).click();
-
-  await page.getByRole('radio', { name: /WhatsApp/i }).check();
-
-  await selectWhatsAppTemplate(page, whatsappTemplateName);
-
-  // 🔹 OPTION 1: Direct select (no search)
-
-  // 🔹 OPTION 2: With search (uncomment if needed)
-  
-  await page.getByRole('button', { name: /Submit/i }).click();
-});
-  // test('Templates >> Create Template with Delivery mode Whatsapp', async ({ page }) => {
-  // await page.goto(dashboardURL);
-
-  // await page.getByRole('button', { name: 'Create Template' }).click();
-
-  // // ✅ Step 1: Select WhatsApp mode
-  // await page.getByRole('radio', { name: /WhatsApp/i }).check();
-
-  // // ✅ Step 2: Wait until dropdown is visible
-  // await page.getByRole('combobox', { name: 'Select a WhatsApp template' }).click();
-  // // const dropdown = page.getByRole('combobox', { name: 'Select a WhatsApp template' }).click();
-  // // await expect(dropdown).toBeVisible();
-
-  // // ✅ Step 3: Click dropdown properly
-  // await dropdown.click();
-
-  // // ✅ Step 4: Wait for panel (VERY IMPORTANT)
-  // const panel = page.locator('.p-dropdown-panel');
-  // await expect(panel).toBeVisible();
-
-  // // ✅ Step 5: Select option from panel (scoped locator)
-  // await panel.locator('.p-dropdown-item', {
-  //   hasText: 'whatsapp_template_for_hubspot'
-  // }).click();
-
-  // // ✅ Step 6: Submit
-  // await page.getByRole('button', { name: /Submit/i }).click();
-  // });
-
-  // test('Templates >> Create Template with Delivery mode Whatsapp', async ({ page }) => {
-  // await page.goto(dashboardURL);
-  // await page.getByRole('button', { name: 'Create Template' }).click();
-  // // ✅ Step 1: select WhatsApp
-  // await page.getByRole('radio', { name: 'WhatsApp Engage your' }).check();
-  // // ✅ Step 2: wait for dropdown to appear
-  // await page.waitForSelector('text=Select a WhatsApp template');
-  // // ✅ Step 3: open dropdown (use visible text, NOT id)
-  // await page.getByText('Select a WhatsApp template').click();
-  // // ✅ Step 4: wait dropdown panel
-  // await page.waitForSelector('.p-dropdown-panel');
-  // // ✅ Step 5: select option
-  // await page.locator('.p-dropdown-item', {
-  //   hasText: 'whatsapp_template_for_hubspot'
-  // }).click();
-  // // ✅ submit
-  // await page.getByRole('button', { name: 'Submit' }).click();
-  // });
-
-
-
-  // test('Templates >> Create Template with Delivery mode Whatsapp', async ({ page }) => {
-  // await page.goto(dashboardURL);
-  // await page.getByRole('button', { name: 'Create Template' }).click();
-  // await page.getByRole('radio', { name: 'WhatsApp Engage your' }).check();
-  // await page.locator('#pn_id_77').click();
-  // await page.getByRole('option', { name: 'personalized_template' }).click();
-  // await page.getByRole('combobox', { name: 'personalized_template' }).click();
-  // await page.getByRole('option', { name: 'whatsapp_template_for_hubspot' }).click();
-  // await page.getByRole('button', { name: 'dropdown trigger' }).click();
-  // await page.getByRole('option', { name: 'personalized_template' }).click();
-  // await page.getByRole('button', { name: ' Submit' }).click();
-
-  // await page.getByRole('button', { name: 'Create Template' }).click();
-
-  // await page.getByRole('radio', { name: 'WhatsApp Engage your' }).check();
-
-  // const dropdown = page.locator('.p-dropdown');
-  // await dropdown.scrollIntoViewIfNeeded();
-  // await dropdown.click({ force: true });
-
-  // await page.waitForSelector('.p-dropdown-panel');
-
-  // await page.locator('.p-dropdown-item', { hasText: 'whatsapp_template_for_hubspot' }).click();
-
-  // await page.getByRole('button', { name: 'Submit' }).click();
-
-  // test('Templates >> Create Template with Delivery mode Whatsapp', async ({ page }) => {
-  //   await page.goto(dashboardURL);
-  //   await page.getByRole('button', { name: 'Create Template' }).click();
-  //   await page.getByRole('radio', { name: 'WhatsApp Engage your' }).check();
-  //   await page.getByRole('combobox', { name: 'Select a WhatsApp template' }).click();
-
-  //   await page.getByRole('combobox', { name: 'Select a WhatsApp template' }).click();
-
-  //   // wait for dropdown panel
-  //   await page.waitForSelector('.p-dropdown-items');
-
-  //   // then click
-  //    await page.locator('.p-dropdown-item', { hasText: 'whatsapp_template_for_hubspot' }).click();
-
-  //   // await page.getByRole('option', { name: 'whatsapp_template_for_hubspot' }).click();
-  //   await page.getByRole('button', { name: ' Submit' }).click();
-  //   await page.getByRole('button', { name: ' Back' }).click();
-  // });
-
-  test('Templates >> Created Template Date format', async ({ page }) => {
-    await page.goto(dashboardURL);
-  });
 
   test('Templates >> Duplicate Templates in SMS Mode', async ({ page }) => {
     await page.goto(dashboardURL);
@@ -213,6 +95,18 @@ test.describe('Campaign Feature >> Campaigns', () => {
     await page.getByRole('textbox', { name: 'Sms message body here.' }).click();
     await page.getByRole('textbox', { name: 'Sms message body here.' }).fill('Please update your CNIC details');
     await page.getByRole('button', { name: ' Submit' }).click();
+  });
+  
+  test('Templates >> Create Template with Delivery mode Whatsapp new', async ({ page }) => {
+    await page.goto(dashboardURL);
+    await page.getByRole('button', { name: 'Create Template' }).click();
+    await page.getByRole('radio', { name: /WhatsApp/i }).check();
+    await selectWhatsAppTemplate(page, whatsappTemplateName);
+    await page.getByRole('button', { name: /Submit/i }).click();
+  });
+
+  test('Templates >> Created Template Date format', async ({ page }) => {
+    await page.goto(dashboardURL);
   });
 
   test('Templates >> Duplicate Templates in Whatsapps Mode', async ({ page }) => {
@@ -284,4 +178,23 @@ test.describe('Campaign Feature >> Campaigns', () => {
     await expect(page.locator(`text=Template "${recordName}" deleted successfully`)).toBeVisible();
   });
 
+  // test('Templates >> Create Template with SMS', async ({ page }) => {
+  //   await page.goto(dashboardURL);
+  //   await page.getByRole('button', { name: 'Create Template' }).click();
+  //   await page.getByRole('textbox', { name: 'My_Message_Template' }).click();
+  //   await page.getByRole('textbox', { name: 'My_Message_Template' }).fill('Update_CNIC');
+  //   await page.getByRole('textbox', { name: 'Description of template' }).click();
+  //   await page.getByRole('textbox', { name: 'Description of template' }).fill('Personal Name');
+  //   await page.getByRole('textbox', { name: 'Sms message body here.' }).click();
+  //   await page.getByRole('textbox', { name: 'Sms message body here.' }).fill('Please update your CNIC details');
+  //   await page.getByRole('button', { name: ' Submit' }).click();
+  // });
+  
+  // test('Templates >> Create Template with Whatsapp', async ({ page }) => {
+  //   await page.goto(dashboardURL);
+  //   await page.getByRole('button', { name: 'Create Template' }).click();
+  //   await page.getByRole('radio', { name: /WhatsApp/i }).check();
+  //   await selectWhatsAppTemplate(page, whatsappTemplateName);
+  //   await page.getByRole('button', { name: /Submit/i }).click();
+  // });
 });
