@@ -140,7 +140,7 @@ test.describe('Campaign Feature >> Campaigns', () => {
     await page.goto(dashboardURL);
     await clickTemplateAction(page, 'Update_CNIC', 0);
     await page.getByRole('textbox', { name: 'My_Message_Template' }).click();
-    await page.getByRole('textbox', { name: 'My_Message_Template' }).fill('Update_DOB');
+    await page.getByRole('textbox', { name: 'My_Message_Template' }).fill('UpdateDOB');
     await page.getByRole('button', { name: ' Update' }).click();
     
   });
@@ -156,14 +156,14 @@ test.describe('Campaign Feature >> Campaigns', () => {
 
   test('Templates >> Delete Templates in SMS Mode', async ({ page }) => {
     await page.goto(dashboardURL);
-    const recordName = 'Update_DOB'; // jis record ko delete karna hai
+    const recordName = 'UpdateDOB'; // jis record ko delete karna hai
     // const row = page.locator('table tbody tr', { hasText: recordName });
     // await row.locator('.delete-btn').click();
     
     await clickTemplateAction(page, recordName, 1);
 
     await page.getByRole('button', { name: 'Delete' }).click();
-    await expect(page.locator('text=Template "Update_DOB" deleted successfully')).toBeVisible();
+    await expect(page.locator('text=Template "UpdateDOB" deleted successfully')).toBeVisible();
   });
 
   test('Templates >> Delete Templates in Whatsapps Mode', async ({ page }) => {
