@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-  const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
-  const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main/label';
+  const baseURL = 'https://phone.cx.demo-octavebytes.com/campaign-manager/';
+  const dashboardURL = 'https://phone.cx.demo-octavebytes.com/campaign-manager/main/label';
 
   // reusable login function
-  async function login(page, username, password) {
-  await page.getByRole('textbox', { name: 'username' }).fill(username);
+  async function login(page, email, password) {
+  await page.getByRole('textbox', { name: 'email' }).fill(email);
   await page.getByRole('textbox', { name: 'Password' }).fill(password);
   await Promise.all([
     page.waitForNavigation({ waitUntil: 'networkidle' }),
@@ -18,21 +18,21 @@ import { test, expect } from '@playwright/test';
   // LOGIN RUNS BEFORE EVERY TEST (but written once)
   test.beforeEach(async ({ page }) => {
     await page.goto(baseURL);
-    await login(page, "hassan", "hassan");
+    await login(page, "nahmad@octavebytes.com", "octavebytes!123");
   });
 
   test('Labels >> Page Loads Successfully', async ({ page }) => {
     await page.goto(dashboardURL);
     await expect(page).toHaveURL(dashboardURL);
     await page.getByText('Customers').first().click();
-    await page.getByRole('link', { name: ' Labels' }).click();
+    // await page.getByRole('link', { name: ' Labels' }).click();
   });
 
   test('Labels >> Labels List Display', async ({ page }) => {
     await page.goto(dashboardURL);
     await expect(page).toHaveURL(dashboardURL);
     await page.getByText('Customers').first().click();
-    await page.getByRole('link', { name: ' Labels' }).click();
+    // await page.getByRole('link', { name: ' Labels' }).click();
   });
 
   test('Labels >> Craete Labels', async ({ page }) => {
@@ -51,26 +51,18 @@ import { test, expect } from '@playwright/test';
     await page.goto(dashboardURL);
     await expect(page).toHaveURL(dashboardURL);
     await page.getByText('Customers').first().click();
-    await page.getByRole('link', { name: ' Labels' }).click();
+    // await page.getByRole('link', { name: ' Labels' }).click();
     await page.getByRole('button', { name: 'Create Label' }).click();
     await page.getByRole('textbox', { name: 'Enter label name' }).click();
     await page.getByRole('textbox', { name: 'Enter label name' }).fill('Playwright-L');
     await page.getByRole('button', { name: ' Create Label' }).click(); 
   });
 
-  test('Labels >> Search Labels', async ({ page }) => {
-    await page.goto(dashboardURL);
-    await expect(page).toHaveURL(dashboardURL);
-    await page.getByText('Customers').first().click();
-    await page.getByRole('textbox', { name: 'Search by Name' }).click();
-    await page.getByRole('textbox', { name: 'Search by Name' }).fill('Playwright-L');
-  });
-
   test('Labels >> Actions Icons Visibility', async ({ page }) => {
     await page.goto(dashboardURL);
     await expect(page).toHaveURL(dashboardURL);
     await page.getByText('Customers').first().click();
-    await page.getByRole('link', { name: ' Labels' }).click();
+    // await page.getByRole('link', { name: ' Labels' }).click();
     await expect(page.getByRole('heading', { name: 'Labels' })).toBeVisible();
 
     // ✅ more specific: cards with exactly 3 buttons
@@ -98,35 +90,43 @@ import { test, expect } from '@playwright/test';
   }
   });
 
-  test('Labels >> View Labels', async ({ page }) => {
+  test('Labels >> Search Labels', async ({ page }) => {
     await page.goto(dashboardURL);
     await expect(page).toHaveURL(dashboardURL);
     await page.getByText('Customers').first().click();
-    await page.getByRole('link', { name: ' Labels' }).click();
-    await page.getByRole('button').nth(3).click(); // click view button
-  });
-
-  test('Labels >> Edit Labels', async ({ page }) => {
-    await page.goto(dashboardURL);
-    await expect(page).toHaveURL(dashboardURL);
-    await page.getByText('Customers').first().click();
-    await page.getByRole('link', { name: ' Labels' }).click();
-    await page.getByRole('button').nth(1).click();
-    await page.getByRole('textbox', { name: 'Enter label name' }).click();
-    await page.getByRole('textbox', { name: 'Enter label name' }).fill('PWL'); // Update Name
-    await page.getByRole('button', { name: ' Update Label' }).click();
+    await page.getByRole('textbox', { name: 'Search by Name' }).click();
+    await page.getByRole('textbox', { name: 'Search by Name' }).fill('Playwright-L');
   });
 
   test('Labels >> Delete Labels', async ({ page }) => {
     await page.goto(dashboardURL);
     await expect(page).toHaveURL(dashboardURL);
     await page.getByText('Customers').first().click();
-    await page.getByRole('link', { name: ' Labels' }).click();
+    // await page.getByRole('link', { name: ' Labels' }).click();
     const cards = page.locator('div:has(button)'); // wait for cards
     await expect(cards.first()).toBeVisible();
     const firstCard = cards.first(); // pick first card
     await firstCard.locator('button').nth(1).click(); // click DELETE icon (2nd button)
     await page.getByRole('button', { name: 'Delete' }).click(); // confirm delete
+  });
+ 
+  test('Labels >> Edit Labels', async ({ page }) => {
+    await page.goto(dashboardURL);
+    await expect(page).toHaveURL(dashboardURL);
+    await page.getByText('Customers').first().click();
+    // await page.getByRole('link', { name: ' Labels' }).click();
+    await page.getByRole('button').nth(1).click();
+    await page.getByRole('textbox', { name: 'Enter label name' }).click();
+    await page.getByRole('textbox', { name: 'Enter label name' }).fill('PWL'); // Update Name
+    await page.getByRole('button', { name: ' Update Label' }).click();
+  });
+
+  test('Labels >> View Labels', async ({ page }) => {
+    await page.goto(dashboardURL);
+    await expect(page).toHaveURL(dashboardURL);
+    await page.getByText('Customers').first().click();
+    // await page.getByRole('link', { name: ' Labels' }).click();
+    await page.getByRole('button').nth(3).click(); // click view button
   });
 
 });

@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-  const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
-  const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main/report';
+  const baseURL = 'https://phone.cx.demo-octavebytes.com/campaign-manager/';
+  const dashboardURL = 'https://phone.cx.demo-octavebytes.com/campaign-manager/main/report';
 
   // reusable login function
-  async function login(page, username, password) {
-  await page.getByRole('textbox', { name: 'username' }).fill(username);
+  async function login(page, email, password) {
+  await page.getByRole('textbox', { name: 'email' }).fill(email);
   await page.getByRole('textbox', { name: 'Password' }).fill(password);
   await Promise.all([
     page.waitForNavigation({ waitUntil: 'networkidle' }),
@@ -18,7 +18,7 @@ import { test, expect } from '@playwright/test';
   // LOGIN RUNS BEFORE EVERY TEST (but written once)
   test.beforeEach(async ({ page }) => {
     await page.goto(baseURL);
-    await login(page, "hassan", "hassan");
+    await login(page, "nahmad@octavebytes.com", "octavebytes!123");
   });
 
   test('Campaigns Report >> Page Loads Successfully', async ({ page }) => {
@@ -49,12 +49,20 @@ import { test, expect } from '@playwright/test';
 
   test('Campaign Report >> Download Functionality', async ({ page }) => {
     await page.goto(dashboardURL);
-    await page.getByRole('navigation').locator('div').filter({ hasText: /^Campaigns$/ }).click();
+    // await page.getByRole('navigation').locator('div').filter({ hasText: /^Campaigns$/ }).click();
+    // await page.getByRole('link', { name: ' Report' }).click();
+    // await page.getByRole('combobox', { name: 'Select Campaign to load data' }).click();
+    // await page.getByRole('option').first().click();
+    // const downloadPromise = page.waitForEvent('download');
+    // await page.getByRole('button', { name: 'Report' }).click();
+    // const download = await downloadPromise;
+    // expect(download).toBeTruthy(); 
+    await page.getByRole('link', { name: ' Report' }).click();
     await page.getByRole('combobox', { name: 'Select Campaign to load data' }).click();
-    await page.getByText('saaa').click();
-    const downloadPromise = page.waitForEvent('download');
+    await page.getByText('Ali').click();
+    const download1Promise = page.waitForEvent('download');
     await page.getByRole('button', { name: 'Report' }).click();
-    const download = await downloadPromise;
+    const download1 = await download1Promise;
   });
 
   test('Campaign Report >> Load Contact Report Section', async ({ page }) => {
@@ -71,10 +79,10 @@ import { test, expect } from '@playwright/test';
   test('Campaign Report >> Contact Status Count', async ({ page }) => {
     await page.goto(dashboardURL);
   
-    await page.getByRole('navigation').locator('div').filter({ hasText: /^Campaigns$/ }).click();
-      await page.getByRole('link', { name: ' Report' }).click();
-      await page.getByRole('combobox', { name: 'Select Campaign to load data' }).click();
-      await page.getByRole('option').first().click();
+    // await page.getByRole('navigation').locator('div').filter({ hasText: /^Campaigns$/ }).click();
+    await page.getByRole('link', { name: ' Report' }).click();
+    await page.getByRole('combobox', { name: 'Select Campaign to load data' }).click();
+    await page.getByRole('option').first().click();
     // Open Report
     await page.getByText('Campaign Report').click();
   

@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-const baseURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/';
-// const dashboardURL = 'https://ucm.demo-octavebytes.com/unified-campaign-manager/main';
+const baseURL = 'https://phone.cx.demo-octavebytes.com/campaign-manager/login';
+// const dashboardURL = 'https://phone.cx.demo-octavebytes.com/campaign-manager/main';
 
 // reusable login function
-async function login(page, username, password) {
-  await page.getByRole('textbox', { name: 'username' }).fill(username);
+async function login(page, email, password) {
+  await page.getByRole('textbox', { name: 'Email' }).fill(email);
   await page.getByRole('textbox', { name: 'Password' }).fill(password);
   await page.getByRole('button', { name: 'Login' }).click();
 }
@@ -16,43 +16,43 @@ test.describe('Campaign Feature >> Login Campaign', () => {
 
   test('Login >> User can login with valid credentials', async ({ page }) => {
     await page.goto(baseURL);
-    await login(page,"hassan","hassan");
+    await login(page,"nahmad@octavebytes.com","octavebytes!123");
     // await expect(page).toHaveURL(dashboardURL);
   });
 
   test('Login >> User cannot login with invalid credentials', async ({ page }) => {
     await page.goto(baseURL);
-    await login(page,"kashaf","kashaf");
-    await expect(page.getByText(/Invalid username or password/i)).not.toBeVisible();
+    await login(page,"keman@octavebytes.com","kashaf");
+    await expect(page.getByText(/Invalid email or password/i)).not.toBeVisible();
   });
 
-  test('Login >> User cannot login with invalid username', async ({ page }) => {
+  test('Login >> User cannot login with invalid email', async ({ page }) => {
     await page.goto(baseURL);
-    await login(page,"kashaf","hassan");
-    await expect(page.getByText(/Invalid username or password/i)).not.toBeVisible();
+    await login(page,"keman@octavebytes.com","octavebytes!123");
+    await expect(page.getByText(/Invalid email or password/i)).not.toBeVisible();
   });
 
   test('Login >> User cannot login with invalid password', async ({ page }) => {
     await page.goto(baseURL);
-    await login(page,"hassan","kashaf");
-    await expect(page.getByText(/Invalid username or password/i)).not.toBeVisible();
+    await login(page,"nahmad@octavebytes.com","kashaf");
+    await expect(page.getByText(/Invalid email or password/i)).not.toBeVisible();
   });
 
-  test('Login >> fails when username is empty', async ({ page }) => {
+  test('Login >> fails when email is empty', async ({ page }) => {
     await page.goto(baseURL);
-    await login(page,"","hassan");
-    await expect(page.getByText(/Please enter both username and password/i)).toBeVisible();
+    await login(page,"","octavebytes!123");
+    await expect(page.getByText(/Please enter both email and password/i)).toBeVisible();
   });
 
   test('Login >> fails when password is empty', async ({ page }) => {
     await page.goto(baseURL);
-    await login(page,"hassan","");
-    await expect(page.getByText(/Please enter both username and password/i)).toBeVisible();
+    await login(page,"nahmad@octavebytes.com","");
+    await expect(page.getByText(/Please enter both email and password/i)).toBeVisible();
   });
 
-  test('Login >> fails when both username and password are empty', async ({ page }) => {
+  test('Login >> fails when both email and password are empty', async ({ page }) => {
     await page.goto(baseURL);
     await login(page,"","");
-    await expect(page.getByText(/Please enter both username and password/i)).toBeVisible();
+    await expect(page.getByText(/Please enter both email and password/i)).toBeVisible();
   });
 });
